@@ -23,7 +23,9 @@ const multerStorage = multer.diskStorage({
 function blogController(){
     return{
         async createBlog(req, res){
-
+          if(!req.cookies.user){res.json({error: "User not logged in."})}
+          else
+          {
             await upload(req, res, (err)=>{
               
               //if there is error in uploading image
@@ -45,6 +47,7 @@ function blogController(){
                   })
                 }
             })
+          }
         },
         async allBlogs(req, res){
           if(!req.cookies.user){res.json({error: "User not logged in."})}

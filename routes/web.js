@@ -8,6 +8,7 @@ const authController = require("../app/http/controllers/authController.js")
 async function initRoutes(app){
     app.get("/", homeController().index);
     app.get("/login", authController().login);
+    app.get("/logout", authController().logout);
 
     app.post("/createBlog", blogController().createBlog);
     app.get("/myBlogs", blogController().allBlogs);
@@ -15,6 +16,7 @@ async function initRoutes(app){
 
     app.post("/createUser", await authController().postRegister)
     app.post("/loginUser", await authController().postLogin)
+    
 }
 
 module.exports = initRoutes;
