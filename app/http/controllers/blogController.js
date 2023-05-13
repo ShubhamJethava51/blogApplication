@@ -23,6 +23,7 @@ const multerStorage = multer.diskStorage({
 function blogController(){
     return{
         async createBlog(req, res){
+          //check if user is logged in if not give error
           if(!req.cookies.user){res.json({error: "User not logged in."})}
           else
           {
@@ -50,6 +51,7 @@ function blogController(){
           }
         },
         async allBlogs(req, res){
+          //check if user is logged in if not give error
           if(!req.cookies.user){res.json({error: "User not logged in."})}
           else
           {
@@ -65,15 +67,20 @@ function blogController(){
           }
         },
         async singleBlog(req, res){
-          await mysql_con.query(`SELECT * FROM blogs WHERE id = ${req.params.id}`, (err, result)=>{
-            if(err) throw err
-              else if(result.length>0){
-                res.json(result);
-              }
-              else{
-                res.json({error: "No blog found."});
-              }
-          })
+          //check if user is logged in if not give error
+          if(!req.cookies.user){res.json({error: "User not logged in."})}
+          else
+          {
+            await mysql_con.query(`SELECT * FROM blogs WHERE id = ${req.params.id}`, (err, result)=>{
+              if(err) throw err
+                else if(result.length>0){
+                  res.json(result);
+                }
+                else{
+                  res.json({error: "No blog found."});
+                }
+            })
+          }
         }
     }
 }

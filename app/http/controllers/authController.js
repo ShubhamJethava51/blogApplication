@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 
 function authController(){
     return{
+        //logout user
         logout(req, res){
             if(req.cookies.user){
                 res.clearCookie("user");
