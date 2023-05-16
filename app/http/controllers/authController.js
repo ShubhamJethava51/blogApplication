@@ -25,11 +25,10 @@ function authController(){
 
         //on post request from register form
         postRegister(req, res){
-            console.log(req.body)
             if(req.cookies.user){
                 res.json({error: "User already logged in."})
             }else{
-
+                
                 //get email and password as "Npassword" (password is going to be used to store hashed password)
                 const {email, password:Npassword} = req.body;
     
@@ -73,7 +72,6 @@ function authController(){
             if(req.cookies.user){
                 res.json({error: "User already logged in."})
             }else{
-                console.log(req.body)
                 const {email, password} = req.body;
                 if(!email || !password || email=="" || password==""){
                     res.json({error: "Please enter your email and password"});
