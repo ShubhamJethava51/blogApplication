@@ -9,13 +9,15 @@ async function initRoutes(app){
     app.get("/", homeController().index);
     app.get("/login", authController().login);
     app.get("/logout", authController().logout);
+    app.post("/createUser", await authController().postRegister)
+    app.post("/loginUser", await authController().postLogin)
 
     app.post("/createBlog", blogController().createBlog);
     app.get("/myBlogs", blogController().allBlogs);
     app.get("/myBlogs/:id", blogController().singleBlog);
+    // app.put("/updateBlog/:id", blogController().singleBlogUpdate)
+    // app.post("/deleteBlog/:id", blogController().deleteBlog)
 
-    app.post("/createUser", await authController().postRegister)
-    app.post("/loginUser", await authController().postLogin)
     
 }
 
